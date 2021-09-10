@@ -1,0 +1,20 @@
+
+modLoader="javafml"
+loaderVersion="[36,)"
+license="All rights reserved"
+[[mods]]
+modId="signal"
+version="1.0.3"
+displayName="Signal"
+logoFile="logo.png"
+credits="Thanks for supporters"
+authors="Tapio"
+description='''
+This is Signal, a tiny mod to bring "Signal" to Minecraft Overworld.
+'''
+[[dependencies.signal]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5]"
+    ordering="NONE"
+    side="BOTH"

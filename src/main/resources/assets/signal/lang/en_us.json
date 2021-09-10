@@ -1,0 +1,8 @@
+{
+  "item.signal.communicator": "Communicator",
+  "itemGroup.signal_group": "Signal",
+  "item.signal.aerial": "Aerial",
+  "item.signal.hull": "Hull",
+  "item.signal.mainboard": "Mainboard",
+  "item.signal.battery": "Battery"
+}
