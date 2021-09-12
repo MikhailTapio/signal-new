@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class Communicator extends Item {
     public Communicator(){
-        super (new Properties().tab(ModGroup.itemgroup));
+        super (new Properties().tab(ModGroup.itemgroup).stacksTo(1).durability(0));
     }
 }

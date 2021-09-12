@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class Hull extends Item {
     public Hull(){
-        super (new Properties().tab(ModGroup.itemgroup));
+        super (new Properties().tab(ModGroup.itemgroup).stacksTo(1));
     }
 }

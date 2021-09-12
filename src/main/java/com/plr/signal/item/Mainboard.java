@@ -5,6 +5,6 @@ import net.minecraft.item.Item;
 
 public class Mainboard extends Item {
     public Mainboard(){
-        super (new Properties().tab(ModGroup.itemgroup));
+        super (new Properties().tab(ModGroup.itemgroup).stacksTo(1));
     }
 }
