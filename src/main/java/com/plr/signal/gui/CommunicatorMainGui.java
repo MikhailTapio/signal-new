@@ -5,9 +5,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.plr.signal.Utils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.util.Constants;
 
 public class CommunicatorMainGui extends Screen {
     Button opstoggle;
@@ -24,15 +29,17 @@ public class CommunicatorMainGui extends Screen {
 
     @Override
     protected void init() {
-        this.opstoggle = new Button(this.width / 2 - 40, 96, 80, 20,
+        int guiLeft = this.width / 2 - 75;
+        int guiTop = this.height / 2 - 75;
+        this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20,
                 new TranslationTextComponent("signal.gui.toggle"), (button) -> {
 
         });
-        this.senda = new Button(this.width / 2 - 40, 96, 80, 20,
+        this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,
                 new TranslationTextComponent("signal.gui.send"), (button) -> {
 
         });
-        this.remotecontrol = new Button(this.width / 2 - 40, 96, 80, 20,
+        this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
                 new TranslationTextComponent("signal.gui.rcontrol"), (button) -> {
 
         });
@@ -48,6 +55,8 @@ public class CommunicatorMainGui extends Screen {
         int textureWidth = 150;
         int textureHeight = 150;
         blit(matrixStack, this.width / 2 - 75, this.height / 2 - 75, 0, 0, 150, 150, textureWidth, textureHeight);
-
+        this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getTag().getLong("x")), 24, 84, -1282963);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
+
 }

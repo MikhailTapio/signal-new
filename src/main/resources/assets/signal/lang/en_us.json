@@ -1,8 +1,12 @@
 {
-  "item.signal.communicator": "Communicator",
   "itemGroup.signal_group": "Signal",
+  "item.signal.communicator": "Communicator",
   "item.signal.aerial": "Aerial",
   "item.signal.hull": "Hull",
   "item.signal.mainboard": "Mainboard",
-  "item.signal.battery": "Battery"
+  "item.signal.battery": "Battery",
+  "signal.emptyword": "",
+  "signal.gui.toggle": "Toggle",
+  "signal.gui.send": "Send",
+  "signal.gui.rcontrol": "RControl"
 }

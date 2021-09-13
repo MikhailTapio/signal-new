@@ -1,8 +1,12 @@
 {
-  "item.signal.communicator": "寻呼机",
   "itemGroup.signal_group": "讯号",
+  "item.signal.communicator": "寻呼机",
   "item.signal.aerial": "天线",
   "item.signal.hull": "外壳",
   "item.signal.mainboard": "主板",
-  "item.signal.battery": "电池"
+  "item.signal.battery": "电池",
+  "signal.emptyword": "",
+  "signal.gui.toggle": "开关",
+  "signal.gui.send": "发送",
+  "signal.gui.rcontrol": "远程控制"
 }
