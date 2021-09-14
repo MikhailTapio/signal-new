@@ -6,7 +6,9 @@
   "item.signal.mainboard": "主板",
   "item.signal.battery": "电池",
   "signal.emptyword": "",
-  "signal.gui.toggle": "开关",
+  "signal.gui.toggle.true": "开启",
+  "signal.gui.toggle.false": "关闭",
   "signal.gui.send": "发送",
+  "signal.gui.sendsignal": "讯号",
   "signal.gui.rcontrol": "远程控制"
 }

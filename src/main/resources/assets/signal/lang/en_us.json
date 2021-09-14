@@ -6,7 +6,9 @@
   "item.signal.mainboard": "Mainboard",
   "item.signal.battery": "Battery",
   "signal.emptyword": "",
-  "signal.gui.toggle": "Toggle",
+  "signal.gui.toggle.true": "Switch On",
+  "signal.gui.toggle.false": "Switch Off",
   "signal.gui.send": "Send",
+  "signal.gui.sendsignal": "Signal",
   "signal.gui.rcontrol": "RControl"
 }

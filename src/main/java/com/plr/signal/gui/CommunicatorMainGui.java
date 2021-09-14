@@ -1,18 +1,15 @@
 package com.plr.signal.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.plr.signal.Utils;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 public class CommunicatorMainGui extends Screen {
     Button opstoggle;
@@ -32,11 +29,16 @@ public class CommunicatorMainGui extends Screen {
         int guiLeft = this.width / 2 - 75;
         int guiTop = this.height / 2 - 75;
         this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20,
-                new TranslationTextComponent("signal.gui.toggle"), (button) -> {
-
+                new TranslationTextComponent("signal.gui.toggle." + !this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson") + "" ), (button) -> {
+            if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
+            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean("opson",false );
+            }else if(!this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
+            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean("opson",true );
+            }
+            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUI::new);
         });
         this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,
-                new TranslationTextComponent("signal.gui.send"), (button) -> {
+                new TranslationTextComponent("signal.gui.sendsignal"), (button) -> {
 
         });
         this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
@@ -55,7 +57,16 @@ public class CommunicatorMainGui extends Screen {
         int textureWidth = 150;
         int textureHeight = 150;
         blit(matrixStack, this.width / 2 - 75, this.height / 2 - 75, 0, 0, 150, 150, textureWidth, textureHeight);
-        this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getTag().getLong("x")), 24, 84, -1282963);
+        this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                .getLong("locx")), this.width / 2 - 51, this.height / 2 + 9, -12829636);
+        this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                .getLong("locy")), this.width / 2 - 51, this.height / 2 + 22, -12829636);
+        this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                .getLong("locz")), this.width / 2 - 51, this.height / 2 + 35, -12829636);
+        this.font.draw(matrixStack, "X =", this.width / 2 - 69, this.height / 2 + 9, -12829636);
+        this.font.draw(matrixStack, "Y =", this.width / 2 - 69, this.height / 2 + 22, -12829636);
+        this.font.draw(matrixStack, "Z =", this.width / 2 - 69, this.height / 2 + 35, -12829636);
+
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 

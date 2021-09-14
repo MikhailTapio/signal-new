@@ -6,6 +6,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class OpenGUI {
     public OpenGUI() {
-        Minecraft.getInstance().setScreen(new CommunicatorMainGui(new TranslationTextComponent(Utils.MOD_ID + ".emptyword")));
+        Minecraft.getInstance().setScreen(new CommunicatorMainGui(new TranslationTextComponent("")));
     }
 }
