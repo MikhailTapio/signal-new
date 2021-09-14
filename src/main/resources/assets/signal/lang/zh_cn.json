@@ -10,5 +10,9 @@
   "signal.gui.toggle.false": "关闭",
   "signal.gui.send": "发送",
   "signal.gui.sendsignal": "讯号",
-  "signal.gui.rcontrol": "远程控制"
+  "signal.gui.rcontrol": "远程控制",
+  "signal.gui.on": "开",
+  "signal.gui.off": "关",
+  "signal.gui.ops": "寰宇定位系统：",
+  "signal.gui.owner": "拥有者："
 }

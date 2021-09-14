@@ -16,7 +16,9 @@ public class CommunicatorMainGui extends Screen {
     Button senda;
     Button remotecontrol;
     ResourceLocation COMMUNICATOR_MAINGUI_TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/gui/commgui1.png");
-    TranslationTextComponent comm = new TranslationTextComponent("signal.gui.comm");
+    ResourceLocation BATTERY_BASE = new ResourceLocation(Utils.MOD_ID,"textures/gui/batterybase.png" );
+    ResourceLocation BATTERY_CONTENT = new ResourceLocation(Utils.MOD_ID, "textures/gui/batterycontent.png");
+    TranslationTextComponent comm = new TranslationTextComponent("item.signal.communicator");
     TranslationTextComponent owner = new TranslationTextComponent("signal.gui.owner");
     TranslationTextComponent ops = new TranslationTextComponent("signal.gui.ops");
 
@@ -28,14 +30,12 @@ public class CommunicatorMainGui extends Screen {
     protected void init() {
         int guiLeft = this.width / 2 - 75;
         int guiTop = this.height / 2 - 75;
+        String opson = "opson";
         this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20,
                 new TranslationTextComponent("signal.gui.toggle." + !this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson") + "" ), (button) -> {
-            if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean("opson",false );
-            }else if(!this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean("opson",true );
-            }
-            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUI::new);
+            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean(opson
+                    , !this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean(opson));
+            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIa::new);
         });
         this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,
                 new TranslationTextComponent("signal.gui.sendsignal"), (button) -> {
@@ -56,7 +56,28 @@ public class CommunicatorMainGui extends Screen {
         this.minecraft.getTextureManager().bind(COMMUNICATOR_MAINGUI_TEXTURE);
         int textureWidth = 150;
         int textureHeight = 150;
+        int guiLeft = this.width / 2 - 75;
+        int guiTop = this.height / 2 - 75;
         blit(matrixStack, this.width / 2 - 75, this.height / 2 - 75, 0, 0, 150, 150, textureWidth, textureHeight);
+        //Battery
+        this.minecraft.getTextureManager().bind(BATTERY_BASE);
+        blit(matrixStack, guiLeft + 119, guiTop + 1, 0, 0, 16, 16, 16, 16);
+        this.minecraft.getTextureManager().bind(BATTERY_CONTENT);
+        blit(matrixStack, guiLeft + 122, guiTop + 1, 0, 0, Math.toIntExact(11 * this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getLong("currentpower") / 1000), 16, 16, 16);
+        //CommunicatorTitle
+        this.font.draw(matrixStack, comm , this.width / 2 - 69, this.height / 2 - 75 + 4, -1);
+        //Owner
+        this.font.draw(matrixStack, owner , this.width / 2 - 69, this.height / 2 - 75 + 21,-12829636);
+        //OPS
+        this.font.draw(matrixStack, ops , this.width / 2 - 69, this.height / 2 - 40, -12829636);
+        if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
+            this.font.draw(matrixStack,new TranslationTextComponent("signal.gui.on"),
+                    this.width / 2 - 6, this.height / 2 - 40, -12829636);
+        }else{
+            this.font.draw(matrixStack,new TranslationTextComponent("signal.gui.off"),
+                    this.width / 2 - 6, this.height / 2 - 40, -12829636);
+        }
+        //Location
         this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
                 .getLong("locx")), this.width / 2 - 51, this.height / 2 + 9, -12829636);
         this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()

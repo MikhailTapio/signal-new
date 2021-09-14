@@ -10,5 +10,9 @@
   "signal.gui.toggle.false": "Switch Off",
   "signal.gui.send": "Send",
   "signal.gui.sendsignal": "Signal",
-  "signal.gui.rcontrol": "RControl"
+  "signal.gui.rcontrol": "RControl",
+  "signal.gui.on": "On",
+  "signal.gui.off": "Off",
+  "signal.gui.ops": "OPS Status: ",
+  "signal.gui.owner": "Owner: "
 }
