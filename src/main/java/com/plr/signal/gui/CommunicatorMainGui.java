@@ -2,6 +2,8 @@ package com.plr.signal.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.plr.signal.Utils;
+import com.plr.signal.data.IOpsToggleCapability;
+import com.plr.signal.data.ModCapability;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.Hand;
@@ -9,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.DistExecutor;
 
 public class CommunicatorMainGui extends Screen {
@@ -22,6 +25,7 @@ public class CommunicatorMainGui extends Screen {
     TranslationTextComponent owner = new TranslationTextComponent("signal.gui.owner");
     TranslationTextComponent ops = new TranslationTextComponent("signal.gui.ops");
 
+
     protected CommunicatorMainGui(ITextComponent titleIn) {
         super(titleIn);
     }
@@ -30,11 +34,8 @@ public class CommunicatorMainGui extends Screen {
     protected void init() {
         int guiLeft = this.width / 2 - 75;
         int guiTop = this.height / 2 - 75;
-        String opson = "opson";
-        this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20,
-                new TranslationTextComponent("signal.gui.toggle." + !this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson") + "" ), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putBoolean(opson
-                    , !this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean(opson));
+        this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20, new TranslationTextComponent("signal.gui.toggle."+ !this.minecraft.player.getPersistentData().getBoolean("toggle") +""), (button) -> {
+            this.minecraft.player.getPersistentData().putBoolean("toggle", !this.minecraft.player.getPersistentData().getBoolean("toggle"));
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIa::new);
         });
         this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,
@@ -63,14 +64,14 @@ public class CommunicatorMainGui extends Screen {
         this.minecraft.getTextureManager().bind(BATTERY_BASE);
         blit(matrixStack, guiLeft + 119, guiTop + 1, 0, 0, 16, 16, 16, 16);
         this.minecraft.getTextureManager().bind(BATTERY_CONTENT);
-        blit(matrixStack, guiLeft + 122, guiTop + 1, 0, 0, Math.toIntExact(11 * this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getLong("currentpower") / 1000), 16, 16, 16);
+        blit(matrixStack, guiLeft + 122, guiTop + 1, 0, 0, Math.toIntExact(11 * this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("currentpower") / 1000), 16, 16, 16);
         //CommunicatorTitle
         this.font.draw(matrixStack, comm , this.width / 2 - 69, this.height / 2 - 75 + 4, -1);
         //Owner
         this.font.draw(matrixStack, owner , this.width / 2 - 69, this.height / 2 - 75 + 21,-12829636);
         //OPS
         this.font.draw(matrixStack, ops , this.width / 2 - 69, this.height / 2 - 40, -12829636);
-        if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getBoolean("opson")){
+        if(this.minecraft.player.getPersistentData().getBoolean("toggle")){
             this.font.draw(matrixStack,new TranslationTextComponent("signal.gui.on"),
                     this.width / 2 - 6, this.height / 2 - 40, -12829636);
         }else{
