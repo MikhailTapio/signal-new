@@ -86,7 +86,7 @@ public class Communicator extends Item {
 
                 @Override
                 public int getMaxEnergyStored() {
-                    return 1000;
+                    return 100000;
                 }
 
                 @Override
@@ -123,6 +123,8 @@ public class Communicator extends Item {
                 itemstack.getOrCreateTag().putLong("locz", z);
             }
         }
-
+        if (worldIn.isDay() && itemstack.getOrCreateTag().getInt("currentpower") < 100000){
+            itemstack.getOrCreateTag().putInt("currentpower", itemstack.getOrCreateTag().getInt("currentpower") + 1);
+        }
     }
 }
