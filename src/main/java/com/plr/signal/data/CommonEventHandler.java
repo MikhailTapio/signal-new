@@ -15,16 +15,26 @@ public class CommonEventHandler {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation(Utils.MOD_ID, "toggle"), new OpsToggleCapabilityProvider());
+            event.addCapability(new ResourceLocation(Utils.MOD_ID, "settings"), new SignalSettingsCapabilityProvider());
         }
     }
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
         if (!event.isWasDeath()) {
-            LazyOptional<IOpsToggleCapability> oldToggleCap = event.getOriginal().getCapability(ModCapability.OPS_TOGGLE_CAPABILITY);
-            LazyOptional<IOpsToggleCapability> newToggleCap = event.getPlayer().getCapability(ModCapability.OPS_TOGGLE_CAPABILITY);
-            if (oldToggleCap.isPresent() && newToggleCap.isPresent()) {
-                newToggleCap.ifPresent((newCap) -> {
-                    oldToggleCap.ifPresent((oldCap) -> {
+            LazyOptional<IOpsToggleCapability> oldToggleCap1 = event.getOriginal().getCapability(ModCapability.OPS_TOGGLE_CAPABILITY);
+            LazyOptional<ISignalSettingsCapability> oldToggleCap2 = event.getOriginal().getCapability(ModCapability.SIGNAL_SETTINGS_CAPABILITY);
+            LazyOptional<IOpsToggleCapability> newToggleCap1 = event.getPlayer().getCapability(ModCapability.OPS_TOGGLE_CAPABILITY);
+            LazyOptional<ISignalSettingsCapability> newToggleCap2 = event.getPlayer().getCapability(ModCapability.SIGNAL_SETTINGS_CAPABILITY);
+            if (oldToggleCap1.isPresent() && newToggleCap1.isPresent()) {
+                newToggleCap1.ifPresent((newCap) -> {
+                    oldToggleCap1.ifPresent((oldCap) -> {
+                        newCap.deserializeNBT(oldCap.serializeNBT());
+                    });
+                });
+            }
+            if (oldToggleCap2.isPresent() && newToggleCap2.isPresent()) {
+                newToggleCap2.ifPresent((newCap) -> {
+                    oldToggleCap2.ifPresent((oldCap) -> {
                         newCap.deserializeNBT(oldCap.serializeNBT());
                     });
                 });

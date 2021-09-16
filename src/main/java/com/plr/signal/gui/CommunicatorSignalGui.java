@@ -52,35 +52,35 @@ public class CommunicatorSignalGui extends Screen {
         int guiTop = this.height / 2 - 75;
         this.OneKm = new Button(guiLeft + 6, guiTop + 20, 24, 20,
                 new TranslationTextComponent("signal.gui.range.onekm"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("channel", 0);
+            this.minecraft.player.getPersistentData().putInt("channel", 0);
         });
         this.ThisDim = new Button(guiLeft + 34, guiTop + 20, 36, 20,
                 new TranslationTextComponent("signal.gui.range.thisdim"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("channel", 1);
+            this.minecraft.player.getPersistentData().putInt("channel", 1);
         });
         this.OverServer = new Button(guiLeft + 73, guiTop + 20, 40, 20,
                 new TranslationTextComponent("signal.gui.range.overserver"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("channel", 2);
+            this.minecraft.player.getPersistentData().putInt("channel", 2);
         });
         this.Distress = new Button(guiLeft + 6, guiTop + 59, 46, 20,
                 new TranslationTextComponent("signal.gui.type.distress"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("type", 0);
+            this.minecraft.player.getPersistentData().putInt("type", 0);
         });
         this.NeedResource = new Button(guiLeft + 6, guiTop + 93, 54, 20,
                 new TranslationTextComponent("signal.gui.type.resource"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("type", 1);
+            this.minecraft.player.getPersistentData().putInt("type", 1);
         });
         this.NeedHr = new Button(guiLeft + 64, guiTop + 93, 52, 20,
                 new TranslationTextComponent("signal.gui.type.manpower"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("type", 2);
+            this.minecraft.player.getPersistentData().putInt("type", 2);
         });
         this.FindThreat = new Button(guiLeft + 6, guiTop + 125, 40, 20,
                 new TranslationTextComponent("signal.gui.type.threat"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("type", 3);
+            this.minecraft.player.getPersistentData().putInt("type", 3);
         });
         this.FindResource = new Button(guiLeft + 50, guiTop + 125, 54, 20,
                 new TranslationTextComponent("signal.gui.type.resource"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("type", 4);
+            this.minecraft.player.getPersistentData().putInt("type", 4);
         });
         this.Send = new Button(guiLeft + 108, guiTop + 125, 30, 20,
                 new TranslationTextComponent("signal.gui.send"), (button) -> {
@@ -95,9 +95,9 @@ public class CommunicatorSignalGui extends Screen {
         });
         this.Anonymous = new Button(guiLeft + 118, guiTop + 59, 30, 20,
                 new TranslationTextComponent("signal.gui.isanonymous." + this.minecraft.player
-                        .getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("ano") + ""), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("ano",
-                    1 - this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("ano"));
+                        .getPersistentData().getInt("ano") + ""), (button) -> {
+            this.minecraft.player.getPersistentData().putInt("ano",
+                    1 - this.minecraft.player.getPersistentData().getInt("ano"));
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIb::new);
         });
         this.addButton(OneKm);
@@ -129,7 +129,7 @@ public class CommunicatorSignalGui extends Screen {
         this.minecraft.getTextureManager().bind(BATTERY_CONTENT);
         blit(matrixStack, guiLeft + 122, guiTop + 1, 0, 0, Math.toIntExact(11 * this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("currentpower") / 100000), 16, 16, 16);
         //RangeIndicator
-        switch (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("channel")) {
+        switch (this.minecraft.player.getPersistentData().getInt("channel")) {
             case 0:
                 this.minecraft.getTextureManager().bind(RANGE_INDICATOR);
                 blit(matrixStack, guiLeft + 4, guiTop + 20, 0, 0, 2, 20, 2, 20);
@@ -145,7 +145,7 @@ public class CommunicatorSignalGui extends Screen {
             default:
         }
         //TypeIndicator
-        switch (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("type")){
+        switch (this.minecraft.player.getPersistentData().getInt("type")){
             case 0:
                 this.minecraft.getTextureManager().bind(IND_DISTRESS);
                 blit(matrixStack, guiLeft + 4, guiTop + 59, 0, 0, 2, 20, 2, 20);

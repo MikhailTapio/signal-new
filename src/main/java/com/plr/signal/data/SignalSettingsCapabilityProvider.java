@@ -10,21 +10,18 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class OpsToggleCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
-    private IOpsToggleCapability opsToggleCapability;
+public class SignalSettingsCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
+    private ISignalSettingsCapability signalSettingsCapability;
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return cap == ModCapability.OPS_TOGGLE_CAPABILITY ? LazyOptional.of(this::getOrCreateCapability).cast() : LazyOptional.empty();
+        return cap == ModCapability.SIGNAL_SETTINGS_CAPABILITY ? LazyOptional.of(this::getOrCreateCapability).cast() : LazyOptional.empty();
     }
 
     @Nonnull
-    IOpsToggleCapability getOrCreateCapability() {
-        if (opsToggleCapability == null) {
-            this.opsToggleCapability = new OpsToggleCapability(false);
-        }
-        return this.opsToggleCapability;
+    ISignalSettingsCapability getOrCreateCapability() {
+        return this.signalSettingsCapability;
     }
 
     @Override
@@ -37,3 +34,4 @@ public class OpsToggleCapabilityProvider implements ICapabilityProvider, INBTSer
         getOrCreateCapability().deserializeNBT(nbt);
     }
 }
+

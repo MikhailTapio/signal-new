@@ -79,11 +79,11 @@ public class CommunicatorMainGui extends Screen {
         //Location
         if (this.minecraft.player.getPersistentData().getBoolean("toggle"))
         {
-            this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+            this.font.draw(matrixStack, "" + (this.minecraft.player.getPersistentData()
                     .getLong("locx")), this.width / 2 - 51, this.height / 2 + 9, -12829636);
-            this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+            this.font.draw(matrixStack, "" + (this.minecraft.player.getPersistentData()
                     .getLong("locy")), this.width / 2 - 51, this.height / 2 + 22, -12829636);
-            this.font.draw(matrixStack, "" + (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+            this.font.draw(matrixStack, "" + (this.minecraft.player.getPersistentData()
                     .getLong("locz")), this.width / 2 - 51, this.height / 2 + 35, -12829636);
             this.font.draw(matrixStack, "X =", this.width / 2 - 69, this.height / 2 + 9, -12829636);
             this.font.draw(matrixStack, "Y =", this.width / 2 - 69, this.height / 2 + 22, -12829636);

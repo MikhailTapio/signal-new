@@ -31,15 +31,15 @@ public class SendSignal {
         SoundEvent soundEvent = null;
         String stype = null;
         String sender;
-        long actualX = itemstack.getOrCreateTag().getLong("locx");
-        long actualY = itemstack.getOrCreateTag().getLong("locy");
-        long actualZ = itemstack.getOrCreateTag().getLong("locz");
-        if(itemstack.getOrCreateTag().getInt("ano")==0){
+        long actualX = playerIn.getPersistentData().getLong("locx");
+        long actualY = playerIn.getPersistentData().getLong("locy");
+        long actualZ = playerIn.getPersistentData().getLong("locz");
+        if(playerIn.getPersistentData().getInt("ano")==0){
             sender = playerIn.getDisplayName().getString();
         }else {
             sender = new TranslationTextComponent("signal.msg.anonymousplayer").getString();
         }
-        switch (itemstack.getOrCreateTag().getInt("type")){
+        switch (playerIn.getPersistentData().getInt("type")){
             case 0:
                 stype = "distress";
                 soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "emergency"));
@@ -62,7 +62,7 @@ public class SendSignal {
                 break;
             default:
         }
-        switch(itemstack.getOrCreateTag().getInt("channel")){
+        switch(playerIn.getPersistentData().getInt("channel")){
             case 0:
                 if(itemstack.getOrCreateTag().getInt("currentpower")>=20000){
                     {

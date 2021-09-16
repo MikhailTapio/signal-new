@@ -31,6 +31,22 @@ public class CommonSetupEventHandler {
                     },
                     () -> null
             );
+            CapabilityManager.INSTANCE.register(
+                    ISignalSettingsCapability.class,
+                    new Capability.IStorage<ISignalSettingsCapability>() {
+                        @Nullable
+                        @Override
+                        public INBT writeNBT(Capability<ISignalSettingsCapability> capability, ISignalSettingsCapability instance, Direction side) {
+                            return null;
+                        }
+
+                        @Override
+                        public void readNBT(Capability<ISignalSettingsCapability> capability, ISignalSettingsCapability instance, Direction side, INBT nbt) {
+
+                        }
+                    },
+                    () -> null
+            );
         });
     }
 }
