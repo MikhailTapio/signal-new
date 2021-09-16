@@ -40,5 +40,12 @@
   "signal.msg.type.found.resource": "Found Resource. ",
   "signal.msg.locis": "The location is: ",
   "signal.msg.anonymousplayer": "An anonymous player ",
-  "signal.msg.insufficientpower": "Insufficient power!"
+  "signal.msg.insufficientpower": "Insufficient power!",
+  "subtitles.alert": "Signal:Alert",
+  "subtitles.default": "Signal:Normal",
+  "subtitles.emergency": "Signal:Emergency",
+  "subtitles.opsoff": "OPS:Off",
+  "subtitles.opson": "OPS:On",
+  "subtitles.devicebound": "Signal:Device Bound",
+  "subtitles.unbound":"Signal:Device Unbound"
 }

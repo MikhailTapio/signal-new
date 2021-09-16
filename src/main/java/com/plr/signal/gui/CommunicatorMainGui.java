@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,6 +35,13 @@ public class CommunicatorMainGui extends Screen {
         this.opstoggle = new Button(guiLeft + 7, guiTop + 49, 54, 20,
                 new TranslationTextComponent("signal.gui.toggle."+ !this.minecraft.player.getPersistentData().getBoolean("toggle") +""), (button) -> {
             this.minecraft.player.getPersistentData().putBoolean("toggle", !this.minecraft.player.getPersistentData().getBoolean("toggle"));
+            SoundEvent soundevent = null;
+            if(this.minecraft.player.getPersistentData().getBoolean("toggle")){
+                soundevent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "opson"));
+            }else{
+                soundevent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "opsoff"));
+            }
+            this.minecraft.player.playSound(soundevent,1.0F,1.0F);
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIa::new);
         });
         this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,

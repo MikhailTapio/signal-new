@@ -40,5 +40,12 @@
   "signal.msg.type.found.resource": "发现资源。",
   "signal.msg.locis": "坐标为：",
   "signal.msg.anonymousplayer": "匿名玩家",
-  "signal.msg.insufficientpower": "电量不足！"
+  "signal.msg.insufficientpower": "电量不足！",
+  "subtitles.alert": "讯号：警报",
+  "subtitles.default": "讯号：普通",
+  "subtitles.emergency": "讯号：紧急",
+  "subtitles.opsoff": "寰宇定位系统：关闭",
+  "subtitles.opson": "寰宇定位系统：打开",
+  "subtitles.devicebound": "讯号：设备已绑定",
+  "subtitles.unbound": "讯号：设备已解绑"
 }

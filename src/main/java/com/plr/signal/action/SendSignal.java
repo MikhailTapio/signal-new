@@ -26,8 +26,6 @@ import java.util.stream.Collectors;
 
 public class SendSignal {
     public static void sendSignal(ItemStack itemstack, World worldIn, Entity playerIn){
-        ResourceLocation resourceLocation;
-        ResourceLocation resourceLocation2;
         SoundEvent soundEvent = null;
         String stype = null;
         String sender;
