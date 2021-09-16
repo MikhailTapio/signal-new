@@ -1,6 +1,6 @@
 package com.plr.signal;
 
-import com.plr.signal.item.ItemRegistry;
+import com.plr.signal.data.ItemRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 

@@ -1,6 +1,7 @@
-package com.plr.signal.item;
+package com.plr.signal.data;
 
 import com.plr.signal.Utils;
+import com.plr.signal.item.*;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

@@ -29,6 +29,16 @@
   "signal.gui.type.resource": "Resource",
   "signal.gui.type.manpower": "Manpower",
   "signal.gui.type.threat": "Threat",
-  "signal.gui.back": "Back"
-
+  "signal.gui.back": "Back",
+  "signal.msg.1": "sent a signal. Type: ",
+  "signal.msg.2": "sent an over-dimension signal. Type: ",
+  "signal.msg.3": "sent an over-server signal. Type: ",
+  "signal.msg.type.distress": "Distress. ",
+  "signal.msg.type.need.resource": "Need Resource. ",
+  "signal.msg.type.need.manpower": "Need Manpower. ",
+  "signal.msg.type.found.threat": "Found Threat. ",
+  "signal.msg.type.found.resource": "Found Resource. ",
+  "signal.msg.locis": "The location is: ",
+  "signal.msg.anonymousplayer": "An anonymous player ",
+  "signal.msg.insufficientpower": "Insufficient power!"
 }

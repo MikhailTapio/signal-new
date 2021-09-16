@@ -29,6 +29,16 @@
   "signal.gui.type.resource": "资源",
   "signal.gui.type.manpower": "人力",
   "signal.gui.type.threat": "威胁",
-  "signal.gui.back": "返回"
-
+  "signal.gui.back": "返回",
+  "signal.msg.1": "发送了一条讯号，类型为：",
+  "signal.msg.2": "发送了一条全维度讯号，类型为：",
+  "signal.msg.3": "发送了一条全服讯号，类型为：",
+  "signal.msg.type.distress": "遇险。",
+  "signal.msg.type.need.resource": "需要资源。",
+  "signal.msg.type.need.manpower": "需要人力。",
+  "signal.msg.type.found.threat": "发现威胁。",
+  "signal.msg.type.found.resource": "发现资源。",
+  "signal.msg.locis": "坐标为：",
+  "signal.msg.anonymousplayer": "匿名玩家",
+  "signal.msg.insufficientpower": "电量不足！"
 }

@@ -1,9 +1,16 @@
 package com.plr.signal.action;
 
+import com.plr.signal.Utils;
+import com.plr.signal.data.SoundEventRegistry;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.IPacket;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,6 +26,9 @@ import java.util.stream.Collectors;
 
 public class SendSignal {
     public static void sendSignal(ItemStack itemstack, World worldIn, Entity playerIn){
+        ResourceLocation resourceLocation;
+        ResourceLocation resourceLocation2;
+        SoundEvent soundEvent = null;
         String stype = null;
         String sender;
         long actualX = itemstack.getOrCreateTag().getLong("locx");
@@ -32,18 +42,23 @@ public class SendSignal {
         switch (itemstack.getOrCreateTag().getInt("type")){
             case 0:
                 stype = "distress";
+                soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "emergency"));
                 break;
             case 1:
                 stype = "need.resource";
+                soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "default"));
                 break;
             case 2:
                 stype = "need.manpower";
+                soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "default"));
                 break;
             case 3:
                 stype = "found.threat";
+                soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "alert"));
                 break;
             case 4:
                 stype = "found.resource";
+                soundEvent = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "default"));
                 break;
             default:
         }
@@ -66,6 +81,7 @@ public class SendSignal {
                                                 + (new TranslationTextComponent("signal.msg.locis").getString())
                                                 + "("+actualX+","+actualY+","+actualZ+")."
                                 ),false);
+                                ((PlayerEntity) entityiterator).playSound(soundEvent,1.0F,1.0F);
                             }
                         }
                     }
@@ -83,6 +99,7 @@ public class SendSignal {
                                             + (new TranslationTextComponent("signal.msg.locis").getString())
                                             + "("+actualX+","+actualY+","+actualZ+")."
                             ),false);
+                            ((PlayerEntity) entityiterator).playSound(soundEvent,1.0F,1.0F);
                         }}itemstack.getOrCreateTag().putInt("currentpower",itemstack.getOrCreateTag().getInt("currentpower") - 60000);
                 }else{playerIn.sendMessage(new TranslationTextComponent("signal.msg.insufficientpower"), playerIn.getUUID());}
                 break;
@@ -97,6 +114,11 @@ public class SendSignal {
                                             + (new TranslationTextComponent("signal.msg.locis").getString())
                                             + "("+actualX+","+actualY+","+actualZ+")."
                             ), ChatType.SYSTEM,playerIn.getUUID());
+                    List<? extends PlayerEntity> _players = new ArrayList<>(worldIn.players());
+                    for (Entity entityiterator : _players) {
+                        if ((entityiterator instanceof PlayerEntity)) {
+                            ((PlayerEntity) entityiterator).playSound(soundEvent,1.0F,1.0F);
+                        }}
                     itemstack.getOrCreateTag().putInt("currentpower",itemstack.getOrCreateTag().getInt("currentpower") - 90000);}
                 else{playerIn.sendMessage(new TranslationTextComponent("signal.msg.insufficientpower"), playerIn.getUUID());}
                 break;

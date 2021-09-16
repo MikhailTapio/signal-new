@@ -1,6 +1,6 @@
 package com.plr.signal.itemGroup;
 
-import com.plr.signal.item.ItemRegistry;
+import com.plr.signal.data.ItemRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
