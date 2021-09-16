@@ -38,7 +38,7 @@ public class CommunicatorMainGui extends Screen {
         });
         this.senda = new Button(guiLeft + 9, guiTop + 122, 41, 20,
                 new TranslationTextComponent("signal.gui.sendsignal"), (button) -> {
-
+            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIb::new);
         });
         this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
                 new TranslationTextComponent("signal.gui.rcontrol"), (button) -> {
@@ -66,7 +66,7 @@ public class CommunicatorMainGui extends Screen {
         //CommunicatorTitle
         this.font.draw(matrixStack, comm , this.width / 2 - 69, this.height / 2 - 75 + 4, -1);
         //Owner
-        this.font.draw(matrixStack, owner , this.width / 2 - 69, this.height / 2 - 75 + 21,-12829636);
+        this.font.draw(matrixStack, owner.getString() + this.minecraft.player.getUseItem().getOrCreateTag().getString("ownername") , this.width / 2 - 69, this.height / 2 - 75 + 21,-12829636);
         //OPS
         this.font.draw(matrixStack, ops , this.width / 2 - 69, this.height / 2 - 40, -12829636);
         if(this.minecraft.player.getPersistentData().getBoolean("toggle")){

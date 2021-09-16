@@ -1,36 +1,40 @@
 package com.plr.signal.item;
 
-import com.plr.signal.data.IOpsToggleCapability;
-import com.plr.signal.data.ModCapability;
+
 import com.plr.signal.gui.OpenGUIa;
 import com.plr.signal.itemGroup.ModGroup;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Communicator extends Item {
 
@@ -41,7 +45,7 @@ public class Communicator extends Item {
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if ("".equals(playerIn.getUseItem().getOrCreateTag().getString("ownername"))) {
-            playerIn.getUseItem().getOrCreateTag().putString("ownername", playerIn.getDisplayName().toString());
+            playerIn.getUseItem().getOrCreateTag().putString("ownername", playerIn.getDisplayName().getString());
         }
         if (worldIn.isClientSide) {
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIa::new);
@@ -122,9 +126,6 @@ public class Communicator extends Item {
                 itemstack.getOrCreateTag().putLong("locy", y);
                 itemstack.getOrCreateTag().putLong("locz", z);
             }
-        }
-        if (worldIn.isDay() && itemstack.getOrCreateTag().getInt("currentpower") < 100000){
-            itemstack.getOrCreateTag().putInt("currentpower", itemstack.getOrCreateTag().getInt("currentpower") + 1);
         }
     }
 }

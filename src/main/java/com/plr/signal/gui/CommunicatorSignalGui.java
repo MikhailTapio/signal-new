@@ -2,12 +2,16 @@ package com.plr.signal.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.plr.signal.Utils;
+import com.plr.signal.action.SendSignal;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
@@ -26,11 +30,16 @@ public class CommunicatorSignalGui extends Screen {
     ResourceLocation COMMUNICATOR_MAINGUI_TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/gui/commgui1.png");
     ResourceLocation BATTERY_BASE = new ResourceLocation(Utils.MOD_ID, "textures/gui/batterybase.png");
     ResourceLocation BATTERY_CONTENT = new ResourceLocation(Utils.MOD_ID, "textures/gui/batterycontent.png");
+    ResourceLocation RANGE_INDICATOR = new ResourceLocation(Utils.MOD_ID,"textures/gui/indicator/indicator_green.png");
+    ResourceLocation IND_DISTRESS = new ResourceLocation(Utils.MOD_ID,"textures/gui/indicator/indicator_red.png");
+    ResourceLocation IND_RESOURCE = new ResourceLocation(Utils.MOD_ID,"textures/gui/indicator/indicator_cyan.png");
+    ResourceLocation IND_MANPOWER = new ResourceLocation(Utils.MOD_ID,"textures/gui/indicator/indicator_yellow.png");
+    ResourceLocation IND_THREAT = new ResourceLocation(Utils.MOD_ID,"textures/gui/indicator/indicator_orange.png");
     TranslationTextComponent range = new TranslationTextComponent("signal.gui.signalrange");
     TranslationTextComponent type = new TranslationTextComponent("signal.gui.signaltype");
     TranslationTextComponent need = new TranslationTextComponent("signal.gui.need");
-    TranslationTextComponent find = new TranslationTextComponent("signal.gui.find");
-    TranslationTextComponent isanonymous = new TranslationTextComponent("signal.gui.need");
+    TranslationTextComponent found = new TranslationTextComponent("signal.gui.found");
+    TranslationTextComponent isanonymous = new TranslationTextComponent("signal.gui.isanonymous");
 
 
     protected CommunicatorSignalGui(ITextComponent titleIn) {
@@ -51,7 +60,7 @@ public class CommunicatorSignalGui extends Screen {
         });
         this.OverServer = new Button(guiLeft + 73, guiTop + 20, 40, 20,
                 new TranslationTextComponent("signal.gui.range.overserver"), (button) -> {
-            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("channel", 1);
+            this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("channel", 2);
         });
         this.Distress = new Button(guiLeft + 6, guiTop + 59, 46, 20,
                 new TranslationTextComponent("signal.gui.type.distress"), (button) -> {
@@ -75,7 +84,10 @@ public class CommunicatorSignalGui extends Screen {
         });
         this.Send = new Button(guiLeft + 108, guiTop + 125, 30, 20,
                 new TranslationTextComponent("signal.gui.send"), (button) -> {
-
+            ItemStack itemstack= this.minecraft.player.getItemInHand(Hand.MAIN_HAND);
+            World world = this.minecraft.level;
+            Entity entity = this.minecraft.player;
+            SendSignal.sendSignal(itemstack,world,entity);
         });
         this.Back = new Button(guiLeft + 119, guiTop + 151, 30, 20,
                 new TranslationTextComponent("signal.gui.back"), (button) -> {
@@ -86,6 +98,7 @@ public class CommunicatorSignalGui extends Screen {
                         .getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("ano") + ""), (button) -> {
             this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("ano",
                     1 - this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("ano"));
+            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIb::new);
         });
         this.addButton(OneKm);
         this.addButton(ThisDim);
@@ -115,7 +128,52 @@ public class CommunicatorSignalGui extends Screen {
         blit(matrixStack, guiLeft + 119, guiTop + 1, 0, 0, 16, 16, 16, 16);
         this.minecraft.getTextureManager().bind(BATTERY_CONTENT);
         blit(matrixStack, guiLeft + 122, guiTop + 1, 0, 0, Math.toIntExact(11 * this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("currentpower") / 100000), 16, 16, 16);
-        //CommunicatorTitle
+        //RangeIndicator
+        switch (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("channel")) {
+            case 0:
+                this.minecraft.getTextureManager().bind(RANGE_INDICATOR);
+                blit(matrixStack, guiLeft + 4, guiTop + 20, 0, 0, 2, 20, 2, 20);
+                break;
+            case 1:
+                this.minecraft.getTextureManager().bind(RANGE_INDICATOR);
+                blit(matrixStack, guiLeft + 32, guiTop + 20, 0, 0, 2, 20, 2, 20);
+                break;
+            case 2:
+                this.minecraft.getTextureManager().bind(RANGE_INDICATOR);
+                blit(matrixStack, guiLeft + 71, guiTop + 20, 0, 0, 2, 20, 2, 20);
+                break;
+            default:
+        }
+        //TypeIndicator
+        switch (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("type")){
+            case 0:
+                this.minecraft.getTextureManager().bind(IND_DISTRESS);
+                blit(matrixStack, guiLeft + 4, guiTop + 59, 0, 0, 2, 20, 2, 20);
+                break;
+            case 1:
+                this.minecraft.getTextureManager().bind(IND_RESOURCE);
+                blit(matrixStack, guiLeft + 4, guiTop + 93, 0, 0, 2, 20, 2, 20);
+                break;
+            case 2:
+                this.minecraft.getTextureManager().bind(IND_MANPOWER);
+                blit(matrixStack, guiLeft + 62, guiTop + 93, 0, 0, 2, 20, 2, 20);
+                break;
+            case 3:
+                this.minecraft.getTextureManager().bind(IND_THREAT);
+                blit(matrixStack, guiLeft + 4, guiTop + 125, 0, 0, 2, 20, 2, 20);
+                break;
+            case 4:
+                this.minecraft.getTextureManager().bind(IND_RESOURCE);
+                blit(matrixStack, guiLeft + 48, guiTop + 125, 0, 0, 2, 20, 2, 20);
+                break;
+            default:
+        }
+        //SignalTitle
         this.font.draw(matrixStack, range , this.width / 2 - 69, this.height / 2 - 75 + 4, -1);
+        this.font.draw(matrixStack, type ,guiLeft + 5,guiTop + 45, -12829636);
+        this.font.draw(matrixStack, need ,guiLeft + 5,guiTop + 82, -12829636);
+        this.font.draw(matrixStack, found ,guiLeft + 5,guiTop + 115, -12829636);
+        this.font.draw(matrixStack, isanonymous ,guiLeft + 54,guiTop + 64, -12829636);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 }

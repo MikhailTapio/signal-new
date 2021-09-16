@@ -14,5 +14,21 @@
   "signal.gui.on": "开",
   "signal.gui.off": "关",
   "signal.gui.ops": "寰宇定位系统：",
-  "signal.gui.owner": "拥有者："
+  "signal.gui.owner": "拥有者：",
+  "signal.gui.signalrange": "传讯范围：",
+  "signal.gui.signaltype": "讯号类型：",
+  "signal.gui.need": "需要",
+  "signal.gui.found": "发现",
+  "signal.gui.isanonymous": "是否匿名？",
+  "signal.gui.isanonymous.0": "否",
+  "signal.gui.isanonymous.1": "是",
+  "signal.gui.range.onekm": "1km",
+  "signal.gui.range.thisdim": "本维度",
+  "signal.gui.range.overserver": "服务器",
+  "signal.gui.type.distress": "遇险",
+  "signal.gui.type.resource": "资源",
+  "signal.gui.type.manpower": "人力",
+  "signal.gui.type.threat": "威胁",
+  "signal.gui.back": "返回"
+
 }

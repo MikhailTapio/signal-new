@@ -14,5 +14,21 @@
   "signal.gui.on": "On",
   "signal.gui.off": "Off",
   "signal.gui.ops": "OPS Status: ",
-  "signal.gui.owner": "Owner: "
+  "signal.gui.owner": "Owner: ",
+  "signal.gui.signalrange": "Broadcast Range:",
+  "signal.gui.signaltype": "Broadcast Type:",
+  "signal.gui.need": "Need",
+  "signal.gui.found": "Found",
+  "signal.gui.isanonymous":"Anonymous?",
+  "signal.gui.isanonymous.0":"No",
+  "signal.gui.isanonymous.1":"Yes",
+  "signal.gui.range.onekm": "1km",
+  "signal.gui.range.thisdim": "DIM",
+  "signal.gui.range.overserver": "Server",
+  "signal.gui.type.distress": "Distress",
+  "signal.gui.type.resource": "Resource",
+  "signal.gui.type.manpower": "Manpower",
+  "signal.gui.type.threat": "Threat",
+  "signal.gui.back": "Back"
+
 }
