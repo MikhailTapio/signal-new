@@ -50,7 +50,7 @@ public class CommunicatorMainGui extends Screen {
         });
         this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
                 new TranslationTextComponent("signal.gui.rcontrol"), (button) -> {
-
+            DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIc::new);
         });
         this.addButton(opstoggle);
         this.addButton(senda);

@@ -1,16 +1,19 @@
 package com.plr.signal.item;
 
 
+import com.plr.signal.Utils;
 import com.plr.signal.gui.OpenGUIa;
 import com.plr.signal.itemGroup.ModGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.capabilities.Capability;
@@ -31,18 +34,49 @@ public class Communicator extends Item {
     }
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if(!(playerIn.isCrouching())){
         if ("".equals(playerIn.getUseItem().getOrCreateTag().getString("ownername"))) {
             playerIn.getUseItem().getOrCreateTag().putString("ownername", playerIn.getDisplayName().getString());
         }
         if (worldIn.isClientSide) {
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIa::new);
-        }
+        }}
         return super.use(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
+        ActionResultType retval = super.onItemUseFirst(stack, context);
+        World world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        PlayerEntity entity = context.getPlayer();
+        ItemStack itemstack = context.getItemInHand();
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        {
+            TileEntity tileEntity = world.getBlockEntity(pos);
+            double bindtag = 0;
+            if (tileEntity != null) {
+                bindtag = tileEntity.getTileData().getDouble("signalbindable");
+            }
+            if (entity != null && (entity.isCrouching()) && (itemstack.getOrCreateTag().getInt("binding") == 1) && (bindtag == 1)) {
+                itemstack.getOrCreateTag().putInt("bindx", x);
+                itemstack.getOrCreateTag().putInt("bindy", y);
+                itemstack.getOrCreateTag().putInt("bindz", z);
+                itemstack.getOrCreateTag().putString("binddim", world.dimension().toString());
+                itemstack.getOrCreateTag().putInt("bound", 1);
+                itemstack.getOrCreateTag().putInt("binding", 0);
+                entity.playSound(new SoundEvent(new ResourceLocation(Utils.MOD_ID, "devicebound")), 1.0F, 1.0F);
+                entity.sendMessage(new TranslationTextComponent("signal.msg.devicebound"), entity.getUUID());
+            }
+        }
+        return retval;
     }
 
 
 
-    @Override
+        @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, CompoundNBT nbt) {
         return new ICapabilityProvider() {
             private final LazyOptional<IEnergyStorage> lazyOptional = LazyOptional.of(() -> new IEnergyStorage() {
@@ -113,9 +147,6 @@ public class Communicator extends Item {
                 playerIn.getPersistentData().putLong("locy", y);
                 playerIn.getPersistentData().putLong("locz", z);
             }
-        }
-        if (worldIn.isDay() && itemstack.getOrCreateTag().getInt("currentpower") < 100000){
-            {itemstack.getOrCreateTag().putInt("currentpower", itemstack.getOrCreateTag().getInt("currentpower") + 10);}
         }
     }
 }
