@@ -1,6 +1,7 @@
 package com.plr.signal.action;
 
 import com.plr.signal.Utils;
+import com.plr.signal.item.Communicator;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
@@ -79,7 +81,7 @@ public class SendSignal {
                             }
                         }
                     }
-                    itemstack.getOrCreateTag().putInt("currentpower",itemstack.getOrCreateTag().getInt("currentpower") - 20000);
+                    Communicator.consumeEnergy(itemstack,20000);
                 }else{playerIn.sendMessage(new TranslationTextComponent("signal.msg.insufficientpower"), playerIn.getUUID());}
                 break;
             case 1:
@@ -94,26 +96,42 @@ public class SendSignal {
                                             + "("+actualX+","+actualY+","+actualZ+")."
                             ),false);
                             ((PlayerEntity) entityiterator).playSound(soundEvent,1.0F,1.0F);
-                        }}itemstack.getOrCreateTag().putInt("currentpower",itemstack.getOrCreateTag().getInt("currentpower") - 60000);
+                        }}
+                    Communicator.consumeEnergy(itemstack,60000);
                 }else{playerIn.sendMessage(new TranslationTextComponent("signal.msg.insufficientpower"), playerIn.getUUID());}
                 break;
             case 2:
-                if(itemstack.getOrCreateTag().getInt("currentpower")>=90000){
+                if(itemstack.getOrCreateTag().getInt("currentpower")>=90000) {
                     //if (!worldIn.isClientSide()) {
-                        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-                        //if (server != null){
-                            server.getPlayerList().broadcastMessage(new StringTextComponent(
-                                    sender + (new TranslationTextComponent("signal.msg.3").getString())
-                                            + (new TranslationTextComponent("signal.msg.type." + stype).getString())
-                                            + (new TranslationTextComponent("signal.msg.locis").getString())
-                                            + "("+actualX+","+actualY+","+actualZ+")."
-                            ), ChatType.SYSTEM,playerIn.getUUID());
+                    MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+
+                    //if (server != null){
+                    String dim = null;
+                    if ((playerIn.level.dimension().toString()).equals("ResourceKey[minecraft:dimension / minecraft:overworld]")) {
+                        dim = new TranslationTextComponent("signal.msg.dim.world").getString();
+                    } else if ((playerIn.level.dimension().toString()).equals("ResourceKey[minecraft:dimension / minecraft:the_nether])")) {
+                        dim = new TranslationTextComponent("signal.msg.dim.nether").getString();
+                    } else if ((playerIn.level.dimension().toString()).equals("ResourceKey[minecraft:dimension / minecraft:the_end])")) {
+                        dim = new TranslationTextComponent("signal.msg.dim.end").getString();
+                    } else {
+                        dim = new TranslationTextComponent("signal.msg.dim.other").getString();
+                    }
+                    server.getPlayerList().broadcastMessage(new StringTextComponent(
+                            sender + (new TranslationTextComponent("signal.msg.3").getString())
+                                    + (new TranslationTextComponent("signal.msg.type." + stype).getString())
+                                    + (new TranslationTextComponent("signal.msg.locis").getString())
+                                    + "(" + actualX + "," + actualY + "," + actualZ + ")."
+                                    + (new TranslationTextComponent("signal.msg.dimis").getString())
+                                    + dim
+                    ), ChatType.SYSTEM, playerIn.getUUID());
                     List<? extends PlayerEntity> _players = new ArrayList<>(worldIn.players());
                     for (Entity entityiterator : _players) {
                         if ((entityiterator instanceof PlayerEntity)) {
-                            ((PlayerEntity) entityiterator).playSound(soundEvent,1.0F,1.0F);
-                        }}
-                    itemstack.getOrCreateTag().putInt("currentpower",itemstack.getOrCreateTag().getInt("currentpower") - 90000);}
+                            ((PlayerEntity) entityiterator).playSound(soundEvent, 1.0F, 1.0F);
+                        }
+                    }
+                    Communicator.consumeEnergy(itemstack,90000);
+                }
                 else{playerIn.sendMessage(new TranslationTextComponent("signal.msg.insufficientpower"), playerIn.getUUID());}
                 break;
             default:

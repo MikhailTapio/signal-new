@@ -27,6 +27,8 @@ public class Communicator extends Item {
         super(new Properties().tab(ModGroup.itemgroup).stacksTo(1).durability(0));
 
     }
+
+
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if(!(playerIn.isCrouching())){
@@ -143,5 +145,13 @@ public class Communicator extends Item {
                 playerIn.getPersistentData().putLong("locz", z);
             }
         }
+    }
+
+    public static void consumeEnergy(@Nonnull ItemStack stack, int power)
+    {
+        stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
+            e.extractEnergy(power,false);
+        }
+        );
     }
 }
