@@ -15,7 +15,8 @@ import net.minecraftforge.fml.DistExecutor;
 public class CommunicatorMainGui extends Screen {
     Button opstoggle;
     Button senda;
-    Button remotecontrol;
+    //Button remotecontrol;
+
     ResourceLocation COMMUNICATOR_MAINGUI_TEXTURE = new ResourceLocation(Utils.MOD_ID, "textures/gui/commgui1.png");
     ResourceLocation BATTERY_BASE = new ResourceLocation(Utils.MOD_ID,"textures/gui/batterybase.png" );
     ResourceLocation BATTERY_CONTENT = new ResourceLocation(Utils.MOD_ID, "textures/gui/batterycontent.png");
@@ -48,13 +49,13 @@ public class CommunicatorMainGui extends Screen {
                 new TranslationTextComponent("signal.gui.sendsignal"), (button) -> {
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIb::new);
         });
-        this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
+        /*this.remotecontrol = new Button(guiLeft + 54, guiTop + 122, 50, 20,
                 new TranslationTextComponent("signal.gui.rcontrol"), (button) -> {
             DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> OpenGUIc::new);
-        });
+        });*/
         this.addButton(opstoggle);
         this.addButton(senda);
-        this.addButton(remotecontrol);
+        //this.addButton(remotecontrol);
         super.init();
     }
     @Override

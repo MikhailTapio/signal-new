@@ -1,19 +1,14 @@
 package com.plr.signal.item;
 
 
-import com.plr.signal.Utils;
 import com.plr.signal.gui.OpenGUIa;
 import com.plr.signal.itemGroup.ModGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.capabilities.Capability;
@@ -44,7 +39,7 @@ public class Communicator extends Item {
         return super.use(worldIn, playerIn, handIn);
     }
 
-    @Override
+    /*@Override
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
         ActionResultType retval = super.onItemUseFirst(stack, context);
         World world = context.getLevel();
@@ -61,9 +56,9 @@ public class Communicator extends Item {
                 bindtag = tileEntity.getTileData().getDouble("signalbindable");
             }
             if (entity != null && (entity.isCrouching()) && (itemstack.getOrCreateTag().getInt("binding") == 1) && (bindtag == 1)) {
-                itemstack.getOrCreateTag().putInt("bindx", x);
-                itemstack.getOrCreateTag().putInt("bindy", y);
-                itemstack.getOrCreateTag().putInt("bindz", z);
+                itemstack.getOrCreateTag().putDouble("bindx", x);
+                itemstack.getOrCreateTag().putDouble("bindy", y);
+                itemstack.getOrCreateTag().putDouble("bindz", z);
                 itemstack.getOrCreateTag().putString("binddim", world.dimension().toString());
                 itemstack.getOrCreateTag().putInt("bound", 1);
                 itemstack.getOrCreateTag().putInt("binding", 0);
@@ -72,7 +67,7 @@ public class Communicator extends Item {
             }
         }
         return retval;
-    }
+    }*/
 
 
 

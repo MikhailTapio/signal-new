@@ -44,9 +44,9 @@ public class BindManagerGui extends Screen {
                 ,new TranslationTextComponent("signal.gui.unbind"), (button) ->{
             if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bound") == 1){
                 this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("bound", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("bindx", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("bindy", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("bindz", 0);
+                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindx", 0);
+                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindy", 0);
+                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindz", 0);
                 this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putString("binddim", "");
                 this.minecraft.player.playSound(new SoundEvent(new ResourceLocation(Utils.MOD_ID, "unbound")),1.0F,1.0F);
             }
@@ -57,9 +57,9 @@ public class BindManagerGui extends Screen {
                 if (this.minecraft.player.level.dimension().toString().equals(this.minecraft.player.getItemInHand(Hand.MAIN_HAND)
                         .getOrCreateTag().getString("binddim"))) {
                     ConnectDevice.ConnectDevice(this.minecraft.player.level, this.minecraft.player
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bindx")
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bindy")
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bindz"));
+                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindx")
+                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindy")
+                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindz"));
                 }else{
                     this.minecraft.player.sendMessage(new TranslationTextComponent("signal.msg.difdim"),this.minecraft.player.getUUID());
                 }
@@ -100,12 +100,12 @@ public class BindManagerGui extends Screen {
             this.font.draw(matrixStack, "X =", guiLeft + 6, guiTop + 37, -12829636);
             this.font.draw(matrixStack, "Y =", guiLeft + 6, guiTop + 50, -12829636);
             this.font.draw(matrixStack, "Z =", guiLeft + 6, guiTop + 63, -12829636);
-            this.font.draw(matrixStack, this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getInt("bindx")+"", guiLeft + 24, guiTop + 37, -12829636);
-            this.font.draw(matrixStack, this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getInt("bindy")+"", guiLeft + 24, guiTop + 50, -12829636);
-            this.font.draw(matrixStack, this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getInt("bindz")+"", guiLeft + 24, guiTop + 63, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                    .getDouble("bindx"))+"", guiLeft + 24, guiTop + 37, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                    .getDouble("bindy"))+"", guiLeft + 24, guiTop + 50, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
+                    .getDouble("bindz"))+"", guiLeft + 24, guiTop + 63, -12829636);
         }
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
