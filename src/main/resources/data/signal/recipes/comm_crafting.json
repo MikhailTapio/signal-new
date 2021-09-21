@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    "23"
+  ],
+  "key": {
+    "0": {
+      "item": "signal:aerial"
+    },
+    "1": {
+      "item": "signal:mainboard"
+    },
+    "2": {
+      "item": "signal:battery"
+    },
+    "3": {
+      "item": "signal:hull"
+    }
+  },
+  "result": {
+    "item": "signal:communicator",
+    "count": 1
+  }
+}

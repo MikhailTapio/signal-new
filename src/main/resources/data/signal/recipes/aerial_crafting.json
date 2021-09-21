@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "minecraft:wool"
+    },
+    "1": {
+      "item": "minecraft:iron_bars"
+    },
+    "2": {
+      "tag": "minecraft:wool"
+    },
+    "3": {
+      "item": "minecraft:glass"
+    },
+    "4": {
+      "item": "minecraft:iron_bars"
+    },
+    "5": {
+      "item": "minecraft:glass"
+    },
+    "6": {
+      "tag": "minecraft:wool"
+    },
+    "7": {
+      "item": "minecraft:repeater"
+    },
+    "8": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "signal:aerial",
+    "count": 1
+  }
+}
