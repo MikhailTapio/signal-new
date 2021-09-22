@@ -1,7 +1,7 @@
 package com.plr.signal.data;
 
 
-import net.minecraft.core.Direction;
+/*import net.minecraft.core.Direction;
 import net.minecraft.world.level.storage.loot.providers.nbt.NbtProvider;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonSetupEventHandler {
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void onSetupEvent(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             CapabilityManager.INSTANCE.register(
@@ -51,4 +51,4 @@ public class CommonSetupEventHandler {
             );
         });
     }
-*/}
+}*/

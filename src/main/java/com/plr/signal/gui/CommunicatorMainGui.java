@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fmlclient.gui.GuiUtils;
 
 public class CommunicatorMainGui extends Screen {
     public static final ResourceLocation COMMUNICATOR_MAINGUI_TEXTURE = new ResourceLocation(Utils.MOD_ID,"textures/gui/commgui1.png" );
