@@ -56,6 +56,7 @@
   "signal.msg.difdim": "绑定的设备位于其他维度！",
   "signal.msg.devicebound": "设备绑定成功！",
   "signal.msg.deviceinvalid": "设备不支持或已移除！",
+  "signal.tooltip.energy": "能量：",
   "subtitles.alert": "讯号：警报",
   "subtitles.default": "讯号：普通",
   "subtitles.emergency": "讯号：紧急",

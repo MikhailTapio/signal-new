@@ -56,6 +56,7 @@
   "signal.msg.difdim": "The target device is located in another dimension!",
   "signal.msg.devicebound": "Device bound!",
   "signal.msg.deviceinvalid": "Device unsupported or lost!",
+  "signal.tooltip.energy": "Energy: ",
   "subtitles.alert": "Signal:Alert",
   "subtitles.default": "Signal:Normal",
   "subtitles.emergency": "Signal:Emergency",
