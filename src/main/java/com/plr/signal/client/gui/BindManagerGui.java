@@ -34,32 +34,32 @@ public class BindManagerGui extends Screen {
         int guiTop = this.height / 2 - 75;
         this.bind = new Button(guiLeft + 5, guiTop + 78, 35, 20
                 ,new TranslationTextComponent("signal.gui.bind"), (button) -> {
-            if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("binding") == 0 &&
-                    this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bound") == 0){
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("binding", 1);
+            if(this.minecraft.player.getPersistentData().getInt("binding") == 0 &&
+                    this.minecraft.player.getPersistentData().getInt("bound") == 0){
+                this.minecraft.player.getPersistentData().putInt("binding", 1);
                 this.minecraft.player.sendMessage(new TranslationTextComponent("signal.msg.bindtutor"),this.minecraft.player.getUUID());
             }
             });
         this.unbind = new Button(guiLeft + 45, guiTop + 78, 40, 20
                 ,new TranslationTextComponent("signal.gui.unbind"), (button) ->{
-            if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bound") == 1){
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putInt("bound", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindx", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindy", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putDouble("bindz", 0);
-                this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().putString("binddim", "");
+            if(this.minecraft.player.getPersistentData().getInt("bound") == 1){
+                this.minecraft.player.getPersistentData().putInt("bound", 0);
+                this.minecraft.player.getPersistentData().putLong("bindx", 0);
+                this.minecraft.player.getPersistentData().putLong("bindy", 0);
+                this.minecraft.player.getPersistentData().putLong("bindz", 0);
+                this.minecraft.player.getPersistentData().putString("binddim", "");
                 this.minecraft.player.playSound(new SoundEvent(new ResourceLocation(Utils.MOD_ID, "unbound")),1.0F,1.0F);
             }
         });
         this.connect = new Button(guiLeft + 89, guiTop + 78, 48, 20
                 ,new TranslationTextComponent("signal.gui.connect"), (button) ->{
-            if(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bound") == 1) {
-                if (this.minecraft.player.level.dimension().toString().equals(this.minecraft.player.getItemInHand(Hand.MAIN_HAND)
-                        .getOrCreateTag().getString("binddim"))) {
+            if(this.minecraft.player.getPersistentData().getInt("bound") == 1) {
+                if (this.minecraft.player.level.dimension().toString().equals(this.minecraft.player
+                        .getPersistentData().getString("binddim"))) {
                     ConnectDevice.ConnectDevice(this.minecraft.player.level, this.minecraft.player
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindx")
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindy")
-                            , this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getDouble("bindz"));
+                            , this.minecraft.player.getPersistentData().getLong("bindx")
+                            , this.minecraft.player.getPersistentData().getLong("bindy")
+                            , this.minecraft.player.getPersistentData().getLong("bindz"));
                 }else{
                     this.minecraft.player.sendMessage(new TranslationTextComponent("signal.msg.difdim"),this.minecraft.player.getUUID());
                 }
@@ -93,19 +93,19 @@ public class BindManagerGui extends Screen {
         //BindManagerTitle
         this.font.draw(matrixStack, rdmanager , guiLeft + 6, guiTop + 4, -1);
         //BindStatus
-        this.font.draw(matrixStack, new TranslationTextComponent("signal.gui.bindstatus."+this.minecraft.player.getItemInHand(Hand.MAIN_HAND)
-                .getOrCreateTag().getInt("bound")+"") , guiLeft + 6, guiTop + 24, -12829636);
+        this.font.draw(matrixStack, new TranslationTextComponent("signal.gui.bindstatus."+this.minecraft.player.getPersistentData()
+                .getInt("bound")+"") , guiLeft + 6, guiTop + 24, -12829636);
         //Locations
-        if (this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag().getInt("bound") == 1){
+        if (this.minecraft.player.getPersistentData().getInt("bound") == 1){
             this.font.draw(matrixStack, "X =", guiLeft + 6, guiTop + 37, -12829636);
             this.font.draw(matrixStack, "Y =", guiLeft + 6, guiTop + 50, -12829636);
             this.font.draw(matrixStack, "Z =", guiLeft + 6, guiTop + 63, -12829636);
-            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getDouble("bindx"))+"", guiLeft + 24, guiTop + 37, -12829636);
-            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getDouble("bindy"))+"", guiLeft + 24, guiTop + 50, -12829636);
-            this.font.draw(matrixStack, Math.round(this.minecraft.player.getItemInHand(Hand.MAIN_HAND).getOrCreateTag()
-                    .getDouble("bindz"))+"", guiLeft + 24, guiTop + 63, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getPersistentData()
+                    .getLong("bindx"))+"", guiLeft + 24, guiTop + 37, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getPersistentData()
+                    .getLong("bindy"))+"", guiLeft + 24, guiTop + 50, -12829636);
+            this.font.draw(matrixStack, Math.round(this.minecraft.player.getPersistentData()
+                    .getLong("bindz"))+"", guiLeft + 24, guiTop + 63, -12829636);
         }
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }

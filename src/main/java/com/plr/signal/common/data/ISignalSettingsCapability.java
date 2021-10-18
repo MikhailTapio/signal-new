@@ -7,6 +7,12 @@ public interface ISignalSettingsCapability extends INBTSerializable<CompoundNBT>
     long getLocx();
     long getLocy();
     long getLocz();
+    long getBindx();
+    long getBindy();
+    long getBindz();
+    int getBound();
+    int getBinding();
+    String getBindDim();
     int getChannel();
     int getSignalType();
     int getAno();

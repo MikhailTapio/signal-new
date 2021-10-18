@@ -2,16 +2,18 @@ package com.plr.signal.common.item;
 
 
 import com.plr.signal.client.gui.OpenGUIa;
+import com.plr.signal.common.Utils;
 import com.plr.signal.common.itemGroup.ModGroup;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -49,13 +51,12 @@ public class Communicator extends Item {
         return super.use(worldIn, playerIn, handIn);
     }
 
-    /*@Override
+    @Override
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
         ActionResultType retval = super.onItemUseFirst(stack, context);
         World world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         PlayerEntity entity = context.getPlayer();
-        ItemStack itemstack = context.getItemInHand();
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
@@ -65,23 +66,23 @@ public class Communicator extends Item {
             if (tileEntity != null) {
                 bindtag = tileEntity.getTileData().getDouble("signalbindable");
             }
-            if (entity != null && (entity.isCrouching()) && (itemstack.getOrCreateTag().getInt("binding") == 1) && (bindtag == 1)) {
-                itemstack.getOrCreateTag().putDouble("bindx", x);
-                itemstack.getOrCreateTag().putDouble("bindy", y);
-                itemstack.getOrCreateTag().putDouble("bindz", z);
-                itemstack.getOrCreateTag().putString("binddim", world.dimension().toString());
-                itemstack.getOrCreateTag().putInt("bound", 1);
-                itemstack.getOrCreateTag().putInt("binding", 0);
+            if (entity != null && (entity.isCrouching()) && (entity.getPersistentData().getInt("binding") == 1) && (bindtag == 1)) {
+                entity.getPersistentData().putLong("bindx", x);
+                entity.getPersistentData().putLong("bindy", y);
+                entity.getPersistentData().putLong("bindz", z);
+                entity.getPersistentData().putString("binddim", world.dimension().toString());
+                entity.getPersistentData().putInt("bound", 1);
+                entity.getPersistentData().putInt("binding", 0);
                 entity.playSound(new SoundEvent(new ResourceLocation(Utils.MOD_ID, "devicebound")), 1.0F, 1.0F);
                 entity.sendMessage(new TranslationTextComponent("signal.msg.devicebound"), entity.getUUID());
             }
         }
         return retval;
-    }*/
+    }
 
 
 
-        @Override
+    @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, CompoundNBT nbt) {
         return new ICapabilityProvider() {
             private final LazyOptional<IEnergyStorage> lazyOptional = LazyOptional.of(() -> new IEnergyStorage() {

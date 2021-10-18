@@ -21,10 +21,17 @@ public class Networking {
                 (version) -> version.equals(VERSION),
                 (version) -> version.equals(VERSION)
         );
+
         INSTANCE.messageBuilder(SendEnergyConsume.class, nextID())
                 .encoder(SendEnergyConsume::toBytes)
                 .decoder(SendEnergyConsume::new)
                 .consumer(SendEnergyConsume::handler)
+                .add();
+
+        INSTANCE.messageBuilder(RemoteControlPacket.class, nextID())
+                .encoder(RemoteControlPacket::toBytes)
+                .decoder(RemoteControlPacket::new)
+                .consumer(RemoteControlPacket::handler)
                 .add();
     }
 }

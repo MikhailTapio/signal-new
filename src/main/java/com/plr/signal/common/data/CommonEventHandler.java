@@ -11,12 +11,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CommonEventHandler {
     @SubscribeEvent
-    public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
-        Entity entity = event.getObject();
+    public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> entityevent) {
+        Entity entity = entityevent.getObject();
         if (entity instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation(Utils.MOD_ID, "toggle"), new OpsToggleCapabilityProvider());
-            event.addCapability(new ResourceLocation(Utils.MOD_ID, "settings"), new SignalSettingsCapabilityProvider());
+            entityevent.addCapability(new ResourceLocation(Utils.MOD_ID, "toggle"), new OpsToggleCapabilityProvider());
+            entityevent.addCapability(new ResourceLocation(Utils.MOD_ID, "settings"), new SignalSettingsCapabilityProvider());
         }
+        /*ItemStack stack = stackevent.getObject();
+        if (stack == ItemRegistry.communicator.get().getDefaultInstance()){
+            stackevent.addCapability(new ResourceLocation(Utils.MOD_ID, "comms"), new CommSettingsCapabilityProvider());
+        };*/
     }
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {

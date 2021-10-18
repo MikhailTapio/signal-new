@@ -1,4 +1,4 @@
-package com.plr.signal.common.data;
+package com.plr.signal.common.init;
 
 import com.plr.signal.common.Utils;
 import net.minecraft.util.ResourceLocation;

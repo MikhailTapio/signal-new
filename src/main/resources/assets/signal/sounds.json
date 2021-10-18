@@ -48,5 +48,25 @@
         "stream": false
       }
     ]
+  },
+  "devicebound": {
+    "category": "player",
+    "subtitle": "subtitles.devicebound",
+    "sounds": [
+      {
+        "name": "signal:devicebound",
+        "stream": false
+      }
+    ]
+  },
+  "unbound": {
+    "category": "player",
+    "subtitle": "subtitles.unbound",
+    "sounds": [
+      {
+        "name": "signal:unbound",
+        "stream": false
+      }
+    ]
   }
 }
