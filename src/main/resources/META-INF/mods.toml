@@ -3,7 +3,7 @@ loaderVersion="[37,)"
 license="All rights reserved"
 [[mods]]
 modId="signal"
-version="1.0.3"
+version="1.0.3.1"
 displayName="Signal"
 logoFile="logo.png"
 credits=""
