@@ -1,4 +1,5 @@
 {
+  "block.signal.charging_stand": "Charging Stand",
   "itemGroup.signal_group": "Signal",
   "item.signal.communicator": "Communicator",
   "item.signal.aerial": "Aerial",

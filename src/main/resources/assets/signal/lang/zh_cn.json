@@ -1,4 +1,5 @@
 {
+  "block.signal.charging_stand": "充电座",
   "itemGroup.signal_group": "讯号",
   "item.signal.communicator": "寻呼机",
   "item.signal.aerial": "天线",

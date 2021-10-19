@@ -9,7 +9,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class CommonEventHandler {
+/*public class CommonEventHandler {
     @SubscribeEvent
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
@@ -41,4 +41,4 @@ public class CommonEventHandler {
             }
         }
     }
-}
+}*/

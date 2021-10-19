@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,charging=true": {
+      "model": "signal:block/charging_stand"
+    },
+    "facing=east,charging=true": {
+      "model": "signal:block/charging_stand",
+      "y": 90
+    },
+    "facing=south,charging=true": {
+      "model": "signal:block/charging_stand",
+      "y": 180
+    },
+    "facing=west,charging=true": {
+      "model": "signal:block/charging_stand",
+      "y": 270
+    },
+    "facing=north,charging=false": {
+      "model": "signal:block/charging_stand_empty"
+    },
+    "facing=east,charging=false": {
+      "model": "signal:block/charging_stand_empty",
+      "y": 90
+    },
+    "facing=south,charging=false": {
+      "model": "signal:block/charging_stand_empty",
+      "y": 180
+    },
+    "facing=west,charging=false": {
+      "model": "signal:block/charging_stand_empty",
+      "y": 270
+    }
+  }
+}
