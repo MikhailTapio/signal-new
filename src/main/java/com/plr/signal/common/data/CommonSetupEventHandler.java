@@ -12,12 +12,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import javax.annotation.Nullable;
 
-/*@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonSetupEventHandler {
     @SubscribeEvent
     public static void onSetupEvent(FMLCommonSetupEvent event) {
         event.enqueueWork(Networking::registerMessage);
-        event.enqueueWork(() -> {
+        /*event.enqueueWork(() -> {
             CapabilityManager.INSTANCE.register(
                     IOpsToggleCapability.class,
                     new Capability<IOpsToggleCapability>() {
@@ -50,7 +50,7 @@ public class CommonSetupEventHandler {
                     },
                     () -> null
             );
-        });
+        });*/
     }
 }
-}*/
+
