@@ -1,0 +1,19 @@
+modLoader="javafml"
+loaderVersion="[38,)"
+license="GPL v3"
+[[mods]]
+modId="signal"
+version="${file.jarVersion}"
+displayName="Signal"
+logoFile="logo.png"
+credits=""
+authors="Tapio"
+description='''
+Bring "Signal" to minecraft overworld.
+'''
+[[dependencies.signal]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18,1.19)"
+    ordering="NONE"
+    side="BOTH"

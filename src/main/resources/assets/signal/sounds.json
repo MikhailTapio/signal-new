@@ -1,0 +1,52 @@
+{
+  "opsoff": {
+    "category": "player",
+    "subtitle": "subtitles.opsoff",
+    "sounds": [
+      {
+        "name": "signal:opsoff",
+        "stream": false
+      }
+    ]
+  },
+  "opson": {
+    "category": "player",
+    "subtitle": "subtitles.opson",
+    "sounds": [
+      {
+        "name": "signal:opson",
+        "stream": false
+      }
+    ]
+  },
+  "emergency": {
+    "category": "player",
+    "subtitle": "subtitles.emergency",
+    "sounds": [
+      {
+        "name": "signal:emergency",
+        "stream": false
+      }
+    ]
+  },
+  "alert": {
+    "category": "player",
+    "subtitle": "subtitles.alert",
+    "sounds": [
+      {
+        "name": "signal:alert",
+        "stream": false
+      }
+    ]
+  },
+  "default": {
+    "category": "player",
+    "subtitle": "subtitles.default",
+    "sounds": [
+      {
+        "name": "signal:default",
+        "stream": false
+      }
+    ]
+  }
+}
